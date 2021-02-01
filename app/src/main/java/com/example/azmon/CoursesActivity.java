@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -28,6 +29,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CoursesActivity extends AppCompatActivity {
@@ -36,6 +38,7 @@ public class CoursesActivity extends AppCompatActivity {
     TextView custom_dialog_text_courses_type, custom_dialog_text_courses_description, custom_dialog_text_courses_price;
     Toolbar toolbar;
     ArrayList<Terms> termsArrayList = new ArrayList<>();
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,13 @@ public class CoursesActivity extends AppCompatActivity {
         final Utils utils = new Utils(getApplicationContext(), CoursesActivity.this);
         setRecyclerViewCourses(utils);
         termsItemList();
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(CoursesActivity.this,FieldActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -62,13 +72,13 @@ public class CoursesActivity extends AppCompatActivity {
         String powerpoint = picPath(R.drawable.powerpoint);
         String word = picPath(R.drawable.word);
         String hashtag = picPath(R.drawable.hashtag);
-        termsArrayList.add(new Terms(1, "جاوا", java, 20000, true, 50,  500, (byte) 1));
-        termsArrayList.add(new Terms(2, "پاورپوینت", powerpoint, 30000, true, 50,  500, (byte) 1));
-        termsArrayList.add(new Terms(3, "اکسل", excel, 40000, true, 50,  700, (byte) 1));
-        termsArrayList.add(new Terms(4, "اکسس", access, 12000, true, 50,  500, (byte) 1));
-        termsArrayList.add(new Terms(5, "سی شارپ", hashtag, 18000, true, 50,  500, (byte) 1));
-        termsArrayList.add(new Terms(6, "ورد", word, 25000, true, 50,  600, (byte) 1));
-        termsArrayList.add(new Terms(7, "سی پلاس پلاس", edit, 32000, true, 50,  600, (byte) 1));
+        termsArrayList.add(new Terms(1, "جاوا", java, 20000, true, 50, 500, (byte) 1));
+        termsArrayList.add(new Terms(2, "پاورپوینت", powerpoint, 30000, true, 50, 500, (byte) 1));
+        termsArrayList.add(new Terms(3, "اکسل", excel, 40000, true, 50, 700, (byte) 1));
+        termsArrayList.add(new Terms(4, "اکسس", access, 12000, true, 50, 500, (byte) 1));
+        termsArrayList.add(new Terms(5, "سی شارپ", hashtag, 18000, true, 50, 500, (byte) 1));
+        termsArrayList.add(new Terms(6, "ورد", word, 25000, true, 50, 600, (byte) 1));
+        termsArrayList.add(new Terms(7, "سی پلاس پلاس", edit, 32000, true, 50, 600, (byte) 1));
     }
 
     private void setUpView() {
@@ -78,6 +88,7 @@ public class CoursesActivity extends AppCompatActivity {
         custom_dialog_text_courses_description = dialog.findViewById(R.id.custom_dialog_text_courses_description);
         custom_dialog_text_courses_price = dialog.findViewById(R.id.custom_dialog_text_courses_price);
         toolbar = findViewById(R.id.activity_courses_toolbar);
+        back=findViewById(R.id.back);
 
     }
 
@@ -95,8 +106,8 @@ public class CoursesActivity extends AppCompatActivity {
                         Picasso.get().load(new File(termsArrayList.get(position).getImageName())).error(R.drawable.tourists).into((ImageView) itemView.findViewById(R.id.activity_courses_image_courses));
                         ((TextView) itemView.findViewById(R.id.activity_courses_text_name)).setText(termsArrayList.get(position).getTermName() + "");
                         ((TextView) itemView.findViewById(R.id.activity_courses_text_count)).setText(termsArrayList.get(position).getNumberQuestionOfLevel() + "");
-                        ((TextView) itemView.findViewById(R.id.activity_courses_text_price)).setText(termsArrayList.get(position).getPrice() + "");
-                    //    Picasso.get().load(new File(termsArrayList.get(position).getImageName())).error(R.mipmap.logocourses).fit().centerCrop().into((ImageView) itemView.findViewById(R.id.activity_courses_image_courses));
+                        ((TextView) itemView.findViewById(R.id.activity_courses_text_price)).setText(splitDigits(termsArrayList.get(position).getPrice()) + "");
+                        //    Picasso.get().load(new File(termsArrayList.get(position).getImageName())).error(R.mipmap.logocourses).fit().centerCrop().into((ImageView) itemView.findViewById(R.id.activity_courses_image_courses));
                         Picasso.get().load(new File(termsArrayList.get(position).getImageName())).error(R.drawable.tourists).fit().centerCrop().into((ImageView) itemView.findViewById(R.id.activity_courses_image_courses));
 
                         final Button activity_courses_button_cart = itemView.findViewById(R.id.activity_courses_button_cart);
@@ -152,5 +163,9 @@ public class CoursesActivity extends AppCompatActivity {
         String path = mfile1.getAbsolutePath().toString() + "/" + filename;
 
         return path;
+    }
+
+    public static String splitDigits(int number) {
+        return new DecimalFormat("###,###,###").format(number);
     }
 }

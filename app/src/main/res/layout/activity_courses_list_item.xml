@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="1.7"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_gravity="center"
@@ -31,7 +31,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3.75"
+        android:layout_weight="4.5"
         android:layoutDirection="rtl"
         android:orientation="vertical">
 
@@ -96,7 +96,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3.75"
+        android:layout_weight="3.8"
         android:layoutDirection="rtl"
         android:orientation="vertical">
 
@@ -105,7 +105,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
             android:gravity="left"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:layout_marginEnd="8dp">
 
 
             <TextView
@@ -135,7 +136,7 @@
             android:layout_height="30dp"
             android:layout_gravity="left"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/background_button"
             android:fontFamily="@font/vazir_bold"
             android:gravity="center"
@@ -150,7 +151,7 @@
             android:layout_height="30dp"
             android:layout_gravity="left"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/background_button1"
             android:padding="3dp"
             android:layout_marginBottom="10dp">
